@@ -54,11 +54,14 @@ public class ManachersAlgorithm {
         }
         char[] ss = Arrays.copyOfRange(s2, c - len, c + len + 1);
 
-        return removeFillers(s2);
+        return removeFillers(ss);
     }
 
     public static void main(String args[]) {
-        String f = findLongestPalindrome("arvind");
+        String s = "abbacdfgdcaba";
+        //String s = "arvind";
+        String f = findLongestPalindrome(s);
+        
         System.out.println(f);
     }
 
@@ -77,8 +80,13 @@ public class ManachersAlgorithm {
     }
 
     private static String removeFillers(char[] s) {
-        String s1 = String.copyValueOf(s);
-        return s1;
-
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length; i++) {
+            char c = s[i];
+            if(c != '$'){
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 }
