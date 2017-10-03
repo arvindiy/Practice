@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="java"/>
+        <group name="java">
+            <file>file:/Users/akrishnaniyer/Practise/Algorithms/src/algo/ManachersAlgorithm.java</file>
+            <file>file:/Users/akrishnaniyer/Practise/Algorithms/src/leet/MaximumSumContiguousSubarray.java</file>
+            <file>file:/Users/akrishnaniyer/Practise/Algorithms/src/leet/PathSum113.java</file>
+            <file>file:/Users/akrishnaniyer/Practise/Algorithms/src/leet/TwoSum1.java</file>
+            <file>file:/Users/akrishnaniyer/Practise/Algorithms/src/algo/LongestPalindromeSubstring.java</file>
+            <file>file:/Users/akrishnaniyer/Practise/Algorithms/src/algo/MarsRover.java</file>
+            <file>file:/Users/akrishnaniyer/Practise/Algorithms/src/leet/MaxProductSubarray.java</file>
+            <file>file:/Users/akrishnaniyer/Practise/Algorithms/src/leet/ArrayPartition561.java</file>
+        </group>
     </open-files>
 </project-private>
