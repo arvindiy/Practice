@@ -1,156 +1,175 @@
 
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
-/**
- *
- * @author akrishnaniyer
- */
 public class Percolation {
 
-    private static final boolean FULL = false;
-    private static final boolean OPEN = true;
+    // number of grid should be n +1，because row and column indices are between 1 and n
+    private int n;
+    // union-find data structure
+    private WeightedQuickUnionUF uf;
+    // mark open site
+    // 0 for Blocked site, 1 for Open site, 2 for Open site connected to the bottom
+    private byte[][] open;
+    // number of open sites
+    private int num;
 
-    private final int n;
-    private final WeightedQuickUnionUF gridUF;
-    private boolean[][] grid;
-    private int openSites;
-
+    /**
+     * create n-by-n grid, with all sites blocked.
+     *
+     * @param n number of dimension
+     */
     public Percolation(int n) {
-        openSites = 0;
-        if (n <= 0) {
-            throw new IllegalArgumentException("N should be greater than 0.");
-        }
-        this.n = n;
-        grid = new boolean[n][n];
+        if (n <= 0) throw new IllegalArgumentException("Invalid input : n must > 0 !");
+        this.n = n + 1;
+        uf = new WeightedQuickUnionUF(this.n * this.n);
+        open = new byte[this.n][this.n];
+    }
 
-        // We are using the extra 2 items for the top most virtual node
-        // and the bottom nirtual node. These two nodes makes it easier for us
-        // to check if the grid percolates or not.
-        gridUF = new WeightedQuickUnionUF((this.n * this.n) + 2);
+    public static void main(String[] args) {
+        In in = new In(args[0]);
+        int n = in.readInt();
+        Percolation percolation = new Percolation(n);
+        boolean isPercolated = false;
+        int count = 0;
+        while (!in.isEmpty()) {
+            int row = in.readInt();
+            int col = in.readInt();
+            if (!percolation.isOpen(row, col)) {
+                count++;
+            }
+            percolation.open(row, col);
+            isPercolated = percolation.percolates();
+            if (isPercolated) {
+                break;
+            }
+        }
+        StdOut.println(count + " open sites");
+        if (isPercolated) {
+            StdOut.println("percolates");
+        } else {
+            StdOut.println("does not percolate");
+        }
+
     }
 
     /**
-     * Open the node, if not already open If the row is the top row, connect it
-     * to the topmost virtual node If the row is the bottom row, connect it to
-     * the bottommost virtual node Connect to the top row Connect to the bottom
-     * row Connect to the left column Connect to the right column
+     * Validate the row and col indices.
      *
-     * @param row
-     * @param col
+     * @param row row index
+     * @param col col index
+     */
+    private void validate(int row, int col) {
+        if (row <= 0 || row >= n) {
+            throw new IndexOutOfBoundsException("Invalid input : row index out of bounds !");
+        }
+        if (col <= 0 || row >= n) {
+            throw new IndexOutOfBoundsException("Invalid input : col index out of bounds !");
+        }
+    }
+
+    /**
+     * open site (row, col) if it is not open already
+     *
+     * @param row the index of row
+     * @param col the index of column
      */
     public void open(int row, int col) {
-        int zeroBasedRow = row - 1;
-        int zeroBasedCol = col - 1;
-        if (zeroBasedRow < 0 || zeroBasedRow > n-1 || zeroBasedCol < 0 || zeroBasedCol > n-1) {
-            throw new IllegalArgumentException("The values should be between 1 and " + n);
+        validate(row, col);
+        // is open already
+        if (isOpen(row, col)) return;
+        // make this site open
+        open[row][col] = 1;
+        num++;
+        // we make 0 represent the virtual-top, 1 represent the virtual-bottom.
+        // is the bottom row
+        if (row == n -1) open[row][col] = 2;
+        // is the top row
+        if (row == 1) {
+            uf.union(0, row * n + col);
+            // 1-by-1 grid corner case
+            if (open[row][col] == 2) open[0][0] = 2;
         }
-
-        grid[zeroBasedRow][zeroBasedCol] = OPEN;
-        openSites++;
-
-        // Connect to the topmost virtual node, if
-        // row is first row (0)
-        if (zeroBasedRow == 0) {
-            gridUF.union(0, convertTo1D(zeroBasedRow, zeroBasedCol));
+        // above site is open
+        if (row - 1 > 0 && isOpen(row - 1, col)) {
+            update(row - 1, col, row, col);
         }
-
-        // Connect to the bottommost virtual node, if 
-        // row is last row (n-1)
-        if (zeroBasedRow == (n - 1)) {
-            gridUF.union((n * n) + 1, convertTo1D(zeroBasedRow, zeroBasedCol));
+        // below site is open
+        if (row + 1 < n && isOpen(row + 1, col)) {
+            update(row + 1, col, row, col);
         }
-
-        // Connect to the bottom row
-        if ((zeroBasedRow + 1) < n) {
-            if (grid[zeroBasedRow + 1][zeroBasedCol] == OPEN) {
-                gridUF.union(convertTo1D(zeroBasedRow, zeroBasedCol), convertTo1D(zeroBasedRow + 1, zeroBasedCol));
-            }
+        // left site is open
+        if (col - 1 > 0 && isOpen(row, col - 1)) {
+            update(row, col - 1, row, col);
         }
-
-        // Connect to the top row
-        if ((zeroBasedRow - 1) >= 0) {
-            if (grid[zeroBasedRow - 1][zeroBasedCol] == OPEN) {
-                gridUF.union(convertTo1D(zeroBasedRow, zeroBasedCol), convertTo1D(zeroBasedRow - 1, zeroBasedCol));
-            }
+        // right site is open
+        if (col + 1 < n && isOpen(row, col + 1)) {
+            update(row, col + 1, row, col);
         }
-
-        // Connect to the right column
-        if ((zeroBasedCol + 1) < n) {
-            if (grid[zeroBasedRow][zeroBasedCol + 1] == OPEN) {
-                gridUF.union(convertTo1D(zeroBasedRow, zeroBasedCol), convertTo1D(zeroBasedRow, zeroBasedCol + 1));
-            }
-        }
-
-        // Connect to the left column
-        if ((zeroBasedCol - 1) >= 0) {
-            if (grid[zeroBasedRow][zeroBasedCol - 1] == OPEN) {
-                gridUF.union(convertTo1D(zeroBasedRow, zeroBasedCol), convertTo1D(zeroBasedRow, zeroBasedCol - 1));
-            }
-        }
-
     }
 
     /**
-     * This method would convert the 2D array into a 1D array, for the ufhelper
-     * to locate the proper element In a 4X4 2D array, the 0-based index (2,2)
-     * would be the 11th element in a one-dimensional array
+     * update components: connect the opened site to all of its adjacent open sites
      *
-     * @param row
-     * @param col
-     * @return
+     * @param i1 adjacent open site row index
+     * @param j1 adjacent open site col index
+     * @param i2 the opened site row index
+     * @param j2 the opened site col index
      */
-    private int convertTo1D(int i, int j) {
-        return ((i * n) + j) + 1;
+    private void update(int i1, int j1, int i2, int j2) {
+        int p = uf.find(i1 * n + j1);
+        int q = uf.find(i2 * n + j2);
+        uf.union(i1 * n + j1, i2 * n + j2);
+        // if one of them is connected to bottom, then the updated component is connected to bottom too.
+        if (open[p / n][p % n] == 2 || open[q / n][q % n] == 2) {
+            int t = uf.find(i2 * n + j2);
+            open[t / n][t % n] = 2;
+        }
     }
 
     /**
-     * is site (zeroBasedRow, zeroBasedCol) open?
+     * is site (row, col) open?
      *
-     * @param row
-     * @param col
+     * @param row row index
+     * @param col col index
      * @return
      */
     public boolean isOpen(int row, int col) {
-        int zeroBasedIndexRow = row - 1;
-        int zeroBasedindexCol = col - 1;
-        if (zeroBasedIndexRow < 0 || zeroBasedIndexRow > (n - 1) || zeroBasedindexCol < 0 || zeroBasedindexCol > (n - 1)) {
-            throw new IllegalArgumentException("The values should be between 1 and " + n);
-        }
-        return grid[zeroBasedIndexRow][zeroBasedindexCol] == OPEN;
+        validate(row, col);
+        return open[row][col] > 0;
     }
 
     /**
-     * is site (zeroBasedRow, zeroBasedCol) full?
+     * is site (row, col) full?
      *
-     * @param row
-     * @param col
+     * @param row row index
+     * @param col col index
      * @return
      */
     public boolean isFull(int row, int col) {
-        int zeroBasedIndexRow = row - 1;
-        int zeroBasedindexCol = col - 1;
-        if (zeroBasedIndexRow < 0 || zeroBasedIndexRow > (n - 1) || zeroBasedindexCol < 0 || zeroBasedindexCol > (n - 1)) {
-            throw new IllegalArgumentException("The values should be between 1 and " + n);
-        }
-        return grid[zeroBasedIndexRow][zeroBasedindexCol] == FULL;
+        validate(row, col);
+        return open[row][col] > 0 && uf.connected(0, row * n + col);
     }
 
     /**
-     * Number of open sites
+     * number of open sites
      *
      * @return
      */
     public int numberOfOpenSites() {
-        return openSites;
+        return num;
     }
 
     /**
-     * does the system percolate? Check if the topmost virtual node connects to
-     * the bottom most virtual node
+     * does the system percolate?
      *
      * @return
      */
     public boolean percolates() {
-        return gridUF.connected(0, n * n + 1);
+        int root = uf.find(0);
+        return open[root / n][root % n] == 2;
     }
+
+
 }
