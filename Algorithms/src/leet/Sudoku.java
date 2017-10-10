@@ -9,26 +9,23 @@ import java.util.HashSet;
  */
 public class Sudoku {
 
-    static int n = 9;
 
     public static void solveSudoku(char[][] board) {
         solve(board);
     }
 
     public static boolean solve(char[][] board) {
-        for (int row = 0; row < n; row++) {
-            for (int col = 0; col < n; col++) {
-                char c = board[row][col];
-                if (c != '.') {
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                
+                if (board[row][col] != '.') {
                     continue;
                 }
                 for (int k = 1; k <= 9; k++) {
-                    char c1 = (char) (k + '0');
-                    System.out.println("trying " + row + " " + col + " " + c1);
-                    board[row][col] = c1;
-                    if (isValid(board, row, col) && solve(board)) {
+                    board[row][col] = (char)(k + '0');
+                    //System.out.println("trying " + row + " " + col + " " + c1);
+                    if (isValid(board, row, col) && solve(board)) 
                         return true;
-                    }
                     board[row][col] = '.';
                 }
                 return false;
@@ -41,27 +38,23 @@ public class Sudoku {
         HashSet<Character> set = new HashSet<Character>();
 
         //Check if all the values in that column are 1-9
-        for (int k = 0; k < n; k++) {
-            char cs = board[row][k];
-
-            if (set.contains(k)) {
+        for (int k = 0; k < 9; k++) {
+            if (set.contains(board[row][k])) {
                 return false;
             }
-            if (cs != '.') {
-                set.add(cs);
+            if (board[row][k] != '.') {
+                set.add(board[row][k]);
             }
         }
         set.clear();
 
         //Check if all the values in that row are 1-9
-        for (int k = 0; k < n; k++) {
-            char cs = board[k][col];
-
-            if (set.contains(k)) {
+        for (int k = 0; k < 9; k++) {
+            if (set.contains(board[k][col])) {
                 return false;
             }
-            if (cs != '.') {
-                set.add(cs);
+            if (board[k][col] != '.') {
+                set.add(board[k][col]);
             }
         }
         set.clear();
@@ -73,13 +66,13 @@ public class Sudoku {
         0,3 to 2,5
         0,6 to 2,8
         
-        2,0 to 4,2
-        2,3 to 4,5
-        2,6 to 4,8
+        3,0 to 5,2
+        3,3 to 5,5
+        3,6 to 5,8
         
-        6,0 to 6,2
-        6,3 to 6,5
-        6,6 to 6,8
+        6,0 to 8,2
+        6,3 to 8,5
+        6,6 to 8,8
         
          */
         for (int i = 0; i < 3; i++) {
@@ -106,7 +99,7 @@ public class Sudoku {
         char[][] grid = {
             {'5', '3', '.', '.', '7', '.', '.', '.', '.'},
             {'6', '.', '.', '1', '9', '5', '.', '.', '.'},
-            {'.', '9', '8', '.', '7', '.', '.', '6', '.'},
+            {'.', '9', '8', '.', '.', '.', '.', '6', '.'},
             {'8', '.', '.', '.', '6', '.', '.', '.', '3'},
             {'4', '.', '.', '8', '.', '3', '.', '.', '1'},
             {'7', '.', '.', '.', '2', '.', '.', '.', '1'},
