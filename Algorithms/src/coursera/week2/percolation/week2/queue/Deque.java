@@ -13,6 +13,8 @@ public class Deque<Item> implements Iterable<Item> {
 		Item item;
 		Node prev;
 		Node next;
+		
+		//Sam
 
 		public Node(Item item) {
 			this.item = item;
