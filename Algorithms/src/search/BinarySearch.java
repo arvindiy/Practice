@@ -18,6 +18,7 @@ public class BinarySearch {
 			} else if (key > arr[m]) {
 				l = m + 1;
 			}else {
+				
 				return m;
 			}
 		}
