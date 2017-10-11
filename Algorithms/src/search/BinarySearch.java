@@ -1,35 +1,29 @@
 package search;
 
-/**
- *
- * @author akrishnaniyer
- */
 public class BinarySearch {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        int[] array = {-3, -2, 0, 1, 2, 4, 67, 89, 90, 123, 123465, 324235};
-        int num = 4;
-        System.out.println(array[binarySearch(array, num)]);
+	public static void main(String[] args) {
+		int arr[] = { 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 19, 20 };
+		int key = 10;
+		System.out.println(binarySearch(arr, key));
+	}
 
-    }
-
-    private static int binarySearch(int[] array, int num) {
-        int low = 0;
-        int high = array.length;
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-            if (num < array[mid]) {
-                high = mid - 1;
-            } else if (num > array[mid]) {
-                low = mid + 1;
-            } else {
-                return mid;
-            }
-        }
-        return -1;
-    }
+	//This is a simple binary search implementation
+	
+	private static int binarySearch(int[] arr, int key) {
+		int l = 0;
+		int h = arr.length - 1;
+		while (l < h) {
+			int m = (h - l) / 2;
+			if (key < arr[m]) {
+				h = m - 1;
+			} else if (key > arr[m]) {
+				l = m + 1;
+			}else {
+				return m;
+			}
+		}
+		return -1;
+	}
 
 }
