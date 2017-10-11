@@ -1,4 +1,4 @@
-package coursera.week2.percolation.week2.queue;
+package coursera.week2.queue;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
