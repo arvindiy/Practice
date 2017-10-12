@@ -77,7 +77,54 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 	@Override
 	public Iterator<Item> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ListIterator(queue, size);
+
+	}
+
+	private class ListIterator<Item> implements Iterator<Item> {
+
+		private Item[] iteratorQueue;
+		private int iteratorIndex = 0;
+
+		public ListIterator(Item[] queue, int size) {
+
+			iteratorQueue = (Item[]) new Object[size];
+
+			// Copy items into iterator queue
+			for (int i = 0; i < iteratorQueue.length; i++) {
+				iteratorQueue[i] = queue[i];
+			}
+
+			// Knuth shuffle the iterator queue
+			for (int j = 1; j < iteratorQueue.length; j++) {
+				int swapIndex = StdRandom.uniform(j + 1);
+
+				Item temp = iteratorQueue[j];
+				iteratorQueue[j] = iteratorQueue[swapIndex];
+				iteratorQueue[swapIndex] = temp;
+			}
+		}
+
+		@Override
+		public boolean hasNext() {
+			return (iteratorIndex < iteratorQueue.length);
+		}
+
+		@Override
+		public Item next() {
+			if (!hasNext()) {
+				throw new NoSuchElementException("No more objects to iterate through");
+			}
+
+			Item item = iteratorQueue[iteratorIndex];
+			iteratorIndex++;
+			return item;
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException("Remove method not supported");
+		}
+
 	}
 }
