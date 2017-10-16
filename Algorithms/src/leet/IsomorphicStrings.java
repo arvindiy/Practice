@@ -7,8 +7,8 @@ import java.util.HashMap;
 public class IsomorphicStrings {
 
 	public static void main(String[] args) {
-		String s1 = "ab";
-		String s2 = "ca";
+		String s1 = "foo";
+		String s2 = "abc";
 		System.out.println(s1 + " and " + s2 + " " + isIsomorphic(s1, s2));
 
 	}
@@ -25,7 +25,7 @@ public class IsomorphicStrings {
 						if(map.get(c1) != c2)
 							return false;
 					}else {
-						if(map.containsKey(c2)) {
+						if(map.containsValue(c2)) {
 							return false;
 						}
 						map.put(c1, c2);

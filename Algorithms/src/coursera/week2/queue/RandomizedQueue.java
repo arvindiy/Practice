@@ -1,130 +1,112 @@
 package coursera.week2.queue;
-
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
+ private Item[] queue;
+ private int n;
+ private int capacity;
 
-	private Item[] queue;
-	private int size;
+ public RandomizedQueue() {
+  // construct an empty randomized queue
+  n = 0;
+  capacity = 1;
+  queue = (Item[]) new Object[capacity];
+ }
 
-	public RandomizedQueue() {
-		size = 0;
-		int defaultSize = 1;
-		queue = (Item[]) new Object[defaultSize];
-	}
+ public boolean isEmpty() {
+  // is the queue empty?
+  return n == 0;
+ }
 
-	public boolean isEmpty() {
-		return size == 0;
-	}
+ public int size() {
+  // return the number of items on the queue
+  return n;
+ }
 
-	public void enqueue(Item item) {
-		if (item == null) {
-			throw new NullPointerException("Cannot enqueue null objects.");
-		}
-		if (queue.length == this.size) {
-			Item[] tmpQueue = (Item[]) new Object[this.size * 2];
-			for (int i = 0; i < queue.length; i++) {
-				tmpQueue[i] = queue[i];
-			}
-			this.queue = tmpQueue;
-		}
-		queue[size] = item;
+ public void enqueue(Item item) {
+  // add the item
+  if (item == null)
+   throw new java.lang.NullPointerException();
+  if (n + 1 > capacity) {
+   resizePlus();
+  }
+  queue[n++] = item;
+ }
 
-		this.size++;
-	}
+ private void resizePlus() {
+  capacity *= 2;
+  Item[] newQueue = (Item[]) new Object[capacity];
+  int index = 0;
+  for (Item i : queue) {
+   newQueue[index++] = i;
+  }
+  queue = newQueue;
+ }
 
-	public Item dequeue() {
-		if (isEmpty()) {
-			throw new NoSuchElementException("There are no elements to dequeue.");
-		}
+ private void resizeMinus() {
+  capacity /= 2;
+  Item[] newQueue = (Item[]) new Object[capacity];
+  int index = 0;
+  for (int i = 0; i < capacity; i++) {
+   newQueue[index++] = queue[i];
+  }
+  queue = newQueue;
+ }
 
-		int index = getRandomIndex();
-		Item item = queue[index];
-		queue[index] = queue[size];
-		queue[size] = null;
-		size--;
+ public Item dequeue() {
+  // delete and return a random item
+  if (isEmpty())
+   throw new java.util.NoSuchElementException();
+  int i = StdRandom.uniform(n);
+  Item ret = queue[i];
+  queue[i] = queue[--n];
+  queue[n] = null;
+  if (capacity / 4 > n) {
+   resizeMinus();
+  }
+  return ret;
+ }
 
-		if (size > 4 && size < (queue.length / 4)) {
-			Item[] tmpQueue = (Item[]) new Object[queue.length / 2];
-			for (int i = 0; i < size; i++) {
-				tmpQueue[i] = queue[i];
-			}
-			this.queue = tmpQueue;
-		}
+ public Item sample() {
+  // return (but do not delete) a random item
+  if (isEmpty())
+   throw new java.util.NoSuchElementException();
+  return queue[StdRandom.uniform(n)];
+ }
 
-		return item;
-	}
+ public Iterator<Item> iterator() {
+  // return an iterator over items in order from front to end
+  return new ListIterator();
+ }
 
-	public Item sample() {
-		if (size == 0) {
-			throw new NoSuchElementException("There are no elements in the queue.");
-		}
-		return queue[getRandomIndex()];
-	}
+ private class ListIterator implements Iterator<Item> {
+  private int current = 0;
+  private int[] shuffledIndexes = new int[n];
 
-	private int getRandomIndex() {
-		int index = 0;
-		while (true) {
-			index = StdRandom.uniform(this.size);
-			if (queue[index] != null) {
-				return index;
-			}
-		}
-	}
+  public boolean hasNext() {
+   if (current == 0) {
+    for (int i = 0; i < n; i++)
+     shuffledIndexes[i] = i;
+    StdRandom.shuffle(shuffledIndexes);
+   }
+   return current < n;
+  }
 
-	@Override
-	public Iterator<Item> iterator() {
-		return new ListIterator(queue, size);
+  public Item next() {
+   if (current == 0) {
+    for (int i = 0; i < n; i++)
+     shuffledIndexes[i] = i;
+    StdRandom.shuffle(shuffledIndexes);
+   }
+   if (current >= n || size() == 0)
+    throw new java.util.NoSuchElementException();
+   return queue[shuffledIndexes[current++]];
+  }
 
-	}
-
-	private class ListIterator<Item> implements Iterator<Item> {
-
-		private Item[] iteratorQueue;
-		private int iteratorIndex = 0;
-
-		public ListIterator(Item[] queue, int size) {
-
-			iteratorQueue = (Item[]) new Object[size];
-
-			// Copy items into iterator queue
-			for (int i = 0; i < iteratorQueue.length; i++) {
-				iteratorQueue[i] = queue[i];
-			}
-
-			// Knuth shuffle the iterator queue
-			for (int j = 1; j < iteratorQueue.length; j++) {
-				int swapIndex = StdRandom.uniform(j + 1);
-
-				Item temp = iteratorQueue[j];
-				iteratorQueue[j] = iteratorQueue[swapIndex];
-				iteratorQueue[swapIndex] = temp;
-			}
-		}
-
-		@Override
-		public boolean hasNext() {
-			return (iteratorIndex < iteratorQueue.length);
-		}
-
-		@Override
-		public Item next() {
-			if (!hasNext()) {
-				throw new NoSuchElementException("No more objects to iterate through");
-			}
-
-			Item item = iteratorQueue[iteratorIndex];
-			iteratorIndex++;
-			return item;
-		}
-
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException("Remove method not supported");
-		}
-
-	}
+  public void remove() {
+   throw new java.lang.UnsupportedOperationException();
+  }
+ }
 }
