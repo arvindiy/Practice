@@ -50,7 +50,7 @@ public class ValidParentheses {
 			default:
 				return false;
 			}
-			
+
 		}
 		return stack.size() == 0;
 	}

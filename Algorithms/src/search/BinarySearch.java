@@ -8,8 +8,8 @@ public class BinarySearch {
 		System.out.println(binarySearch(arr, key));
 	}
 
-	//This is a simple binary search implementation
-	
+	// This is a simple binary search implementation
+
 	private static int binarySearch(int[] arr, int key) {
 		int l = 0;
 		int h = arr.length - 1;
@@ -19,7 +19,7 @@ public class BinarySearch {
 				h = m - 1;
 			} else if (key > arr[m]) {
 				l = m + 1;
-			}else {
+			} else {
 				return m;
 			}
 		}
