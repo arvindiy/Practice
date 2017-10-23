@@ -1,3 +1,4 @@
+package coursera.week3.collinearPoints;
 import java.util.ArrayList;
 import java.util.Arrays;
 

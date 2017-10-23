@@ -1,3 +1,4 @@
+package coursera.week3.collinearPoints;
 /******************************************************************************
  *  Compilation:  javac Point.java
  *  Execution:    java Point
