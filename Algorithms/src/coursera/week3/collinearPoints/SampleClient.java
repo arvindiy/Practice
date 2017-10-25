@@ -3,9 +3,7 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
-/**
- * Created by Ingo on 23.09.2015.
- */
+
 public class SampleClient {
 
     public static void main(String[] args) {
