@@ -5,7 +5,25 @@ public class TreeNode {
 	TreeNode left;
 	TreeNode right;
 
-	TreeNode(int x) {
+	public TreeNode(int x) {
 		val = x;
+	}
+	
+	public int getValue() {
+		return this.val;
+	}
+	
+	public TreeNode getLeftNode() {
+		return this.left;
+	}
+	public TreeNode getRightNode() {
+		return this.right;
+	}
+	
+	public void setLeftNode(TreeNode left) {
+		this.left = left;
+	}
+	public void setRightNode(TreeNode right) {
+		this.right = right;
 	}
 }
