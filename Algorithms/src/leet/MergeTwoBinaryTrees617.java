@@ -5,7 +5,7 @@
  */
 package leet;
 
-import test.TreeNode;
+import leet.node.TreeNode;
 
 /**
  *
