@@ -19,6 +19,10 @@ public class Binary_Tree_Construction_From_Pre_Order_And_In_Order {
 	}
 
 	private TreeNode buildTree(int[] preOrder, int preStart, int preEnd, int[] inOrder, int inStart, int inEnd) {
+
+		if (preStart < preEnd || inStart < inEnd)
+			return null;
+
 		int value = preOrder[preStart];
 		TreeNode node = new TreeNode(value);
 		int index = -1;
@@ -29,9 +33,8 @@ public class Binary_Tree_Construction_From_Pre_Order_And_In_Order {
 			}
 		}
 
-		int newPreStart = preStart + 1;
-		int newPreEnd = preEnd;
-		// node.setLeftNode(left);
+		node.setLeftNode(buildTree(preOrder, preStart + 1, preStart + (index - inStart), inOrder, inStart, index - 1));
+		node.setRightNode(buildTree(preOrder, preStart + (index - inStart) + 1, preEnd, inOrder, index + 1, inEnd));
 
 		return node;
 	}
