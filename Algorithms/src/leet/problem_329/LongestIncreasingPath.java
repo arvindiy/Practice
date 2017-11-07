@@ -5,7 +5,7 @@ package leet.problem_329;
 public class LongestIncreasingPath {
 
 	public static void main(String args[]) {
-		int[][] nums = { { 3, 4, 5 }, { 3, 2, 6 }, { 2, 2, 1 } };
+		int[][] nums = { { 3, 4, 5, 7, 8 }, { 3, 2, 6, 1, 3 }, { 2, 2, 8, 2, 1 } };
 		System.out.println(new LongestIncreasingPath().longestIncreasingPath(nums));
 	}
 
