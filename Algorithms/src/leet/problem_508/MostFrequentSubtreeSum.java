@@ -44,9 +44,8 @@ public class MostFrequentSubtreeSum {
 				retVal[i++] = sum;
 			}
 			
-		}
-		System.out.println(count);
-		return null;
+		}		
+		return retVal;
 	}
 
 	private int postOrderSum(TreeNode node, HashMap<Integer, Integer> map) {
