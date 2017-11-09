@@ -18,6 +18,10 @@ public class MergeSort {
 	}
 
 	private static void mergeSort(int[] nums, int lo, int hi) {
+		
+		//Split the array into two parts
+		//Sort those parts
+		//Merge those two parts
 
 		if (lo < hi) {
 			int mid = (lo + hi) / 2;

@@ -16,6 +16,11 @@ public class SelectionSort {
 	}
 
 	private static void doSelectionSort(int nums[]) {
+		/*
+		 * 1. Take the first position
+		 * 2. Put the minimum element in that position
+		 * 3. Keep doing the same or all positions until you reach the end of the array
+		 */
 		int n = nums.length;
 		for (int i = 0; i < n; i++) {
 			int min = i;
@@ -24,9 +29,13 @@ public class SelectionSort {
 					min = j;
 				}
 			}
-			int tmp = nums[i];
-			nums[i] = nums[min];
-			nums[min] = tmp;
+			swap(nums, i, min);
 		}
+	}
+
+	private static void swap(int[] nums, int i, int min) {
+		int tmp = nums[i];
+		nums[i] = nums[min];
+		nums[min] = tmp;
 	}
 }
