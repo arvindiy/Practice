@@ -21,17 +21,24 @@ public class Binary_Tree_Construction_From_Pre_Order_And_In_Order {
 	private TreeNode buildTree(int[] preOrder, int preStart, int preEnd, int[] inOrder, int inStart, int inEnd) {
 		if (preStart < preEnd || inStart < inEnd)
 			return null;
+		
+		//The first node in the preorder traversal is the root node. 
 		int value = preOrder[preStart];
 		TreeNode node = new TreeNode(value);
 		int index = -1;
+		
+		//Find where that node exists in the inOrder traversal.
 		for (int i = 0; i < inOrder.length; i++) {
 			if (inOrder[i] == value) {
 				index = i;
 				break;
 			}
 		}
+		
 		node.left = (buildTree(preOrder, preStart + 1, preStart + (index - inStart), inOrder, inStart, index - 1));
+		
 		node.right = (buildTree(preOrder, preStart + (index - inStart) + 1, preEnd, inOrder, index + 1, inEnd));
+		
 		return node;
 	}
 }

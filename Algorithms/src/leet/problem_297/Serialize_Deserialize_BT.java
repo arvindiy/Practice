@@ -9,26 +9,48 @@ import leet.node.TreeNode;
 public class Serialize_Deserialize_BT {
 
 	public static void main(String args[]) {
+		
+		/*TreeNode root = new TreeNode(10);
+		root.left = new TreeNode(5);
+		root.left.left = new TreeNode(1);
+		root.left.right = new TreeNode(7);
+		
+		root.right = new TreeNode(40);
+		root.right.left = null;
+		root.right.right = new TreeNode(50);*/
 
 		TreeNode root = new TreeNode(1);
-
-		/*root.left = (new TreeNode(2));
+		root.left = (new TreeNode(2));
 		root.left.left = (new TreeNode(4));
 		root.left.right = (new TreeNode(5));
-		root.right = (new TreeNode(3));*/
-		root.left = (new TreeNode(2));
-		root.right = (new TreeNode(2));
+		root.right = (new TreeNode(3));
+		//root.left = (new TreeNode(2));
+		//root.right = (new TreeNode(2));
 
 		// TreeNode root = null;
 		Serialize_Deserialize_BT obj = new Serialize_Deserialize_BT();
-		// String serializedBT = obj.serialize(root);
-		// System.out.println(serializedBT);
+		String serializedBT = obj.serialize(root);
+		System.out.println(serializedBT);
 		// TreeNode r = obj.deserialize(serializedBT);
 		TreeNode r = obj.deserialize(obj.serialize(root));
 		System.out.println(r.val);
 	}
 
 	// Encodes a tree to a single string.
+	/**
+	 * For the below binary search tree
+	 * 
+	 *      10
+	 *	   /   \
+	 *	  5     40
+	 *	 /  \      \
+	 *	1    7      50
+	 *	the serialize method would return
+	 *	 
+	 *  10,5,1,#,#,7,#,#,40,#,50,#,#
+	 * @param root
+	 * @return
+	 */
 	public String serialize(TreeNode root) {
 		if (root == null)
 			return null;
