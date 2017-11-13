@@ -2,7 +2,7 @@ package algo;
 
 public class FindDuplicateChar {
 	public static void main(String args[]) {
-		String str = "badba";
+		String str = "asdfhlksajdfhasdh,bcskuguwehbf";
 		findDuplicateChar(str);
 	}
 

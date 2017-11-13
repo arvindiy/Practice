@@ -22,7 +22,6 @@ public class IncreasingTripletSubsequence {
 				y = z;
 			else
 				return true;
-			
 		}
 		return false;
 	}
