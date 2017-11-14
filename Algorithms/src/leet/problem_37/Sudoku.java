@@ -1,4 +1,6 @@
-package leet;
+package leet.problem_37;
+
+//https://leetcode.com/problems/sudoku-solver/description/
 
 import java.util.HashSet;
 
