@@ -24,13 +24,11 @@ public class TwoSum {
 		int[] retVal = new int[2];
 		HashMap<Integer, Integer> hm = new HashMap<>();
 		for (int i = 0; i < nums.length; i++) {
-			int j = nums[i];
-			if (hm.get(j) != null) {
-				retVal[0] = i + 1;
-				retVal[1] = hm.get(j) + 1;
-			} else {
-				hm.put((target - j), i);
+			if (hm.containsKey(target - nums[i])) {
+				retVal[1] = i;
+				retVal[0] = hm.get(target-nums[i]);
 			}
+			hm.put(nums[i], i);
 		}
 		return retVal;
 	}
