@@ -1,4 +1,4 @@
-package leet;
+package leet.problem_113;
 
 /**
  *
