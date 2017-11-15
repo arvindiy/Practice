@@ -27,6 +27,7 @@ public class TwoSum {
 			if (hm.containsKey(target - nums[i])) {
 				retVal[1] = i;
 				retVal[0] = hm.get(target-nums[i]);
+				return retVal;
 			}
 			hm.put(nums[i], i);
 		}
