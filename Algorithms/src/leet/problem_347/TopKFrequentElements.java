@@ -1,4 +1,4 @@
-package leet;
+package leet.problem_347;
 
 import java.util.ArrayList;
 import java.util.HashMap;

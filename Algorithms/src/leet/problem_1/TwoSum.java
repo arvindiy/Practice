@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package leet;
+package leet.problem_1;
+
+//https://leetcode.com/problems/two-sum/description/
 
 import java.util.HashMap;
 
-/**
- *
- * @author akrishnaniyer
- */
-public class TwoSum1 {
+public class TwoSum {
 
 	public static void main(String[] args) {
 		int a[] = { 2, 3, 4 };
-		int b[] = new TwoSum1().twoSum(a, 6);
+		int b[] = new TwoSum().twoSum(a, 6);
 		for (int i = 0; i < b.length; i++) {
 			System.out.println(b[i]);
 		}
