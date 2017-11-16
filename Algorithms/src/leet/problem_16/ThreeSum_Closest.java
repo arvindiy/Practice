@@ -12,7 +12,7 @@ public class ThreeSum_Closest {
 	}
 
 	public int threeSumClosest(int[] nums, int target) {
-		int min = Integer.MIN_VALUE;
+		int min = Integer.MAX_VALUE;
 		int result = 0;
 		Arrays.sort(nums);
 
@@ -22,6 +22,7 @@ public class ThreeSum_Closest {
 			while (j < k) {
 				int sum = nums[i] + nums[j] + nums[k];
 				int diff = Math.abs(sum - target);
+				if(diff == 0) return sum;
 				if (diff < min) {
 					min = diff;
 					result = sum;
