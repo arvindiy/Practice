@@ -5,10 +5,10 @@ package leet.node;
  * @author akrishnaniyer
  *
  */
-public class SinglyLinkedListNode {
+public class ListNode {
 	public int val;
-	public SinglyLinkedListNode next;
-	public SinglyLinkedListNode(int val){
+	public ListNode next;
+	public ListNode(int val){
 		this.val = val;
 	}
 }
