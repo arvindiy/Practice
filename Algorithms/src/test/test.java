@@ -1,5 +1,6 @@
 package test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,25 +13,43 @@ import java.util.Stack;
 public class test {
 
 	public static void main(String[] args) {
-		String input = "{{}{{}()()(}{}{}}}";
-		System.out.println(isBalanced(input));
-		input = "((()()(())))";
-		System.out.println(isBalanced(input));
-		input = "[()()[]]}";
-		System.out.println(isBalanced(input));
 
-		List<String> names = Arrays.asList("peter", "anna", "mike", "xenia");
+		System.out.println(Arrays.toString(countBits(5)));
 
-		Collections.sort(names, new Comparator<String>() {
-			@Override
-			public int compare(String a, String b) {
-				return b.compareTo(a);
+		/*
+		 * System.out.println(5 << 1); String input = "{{}{{}()()(}{}{}}}";
+		 * System.out.println(isBalanced(input)); input = "((()()(())))";
+		 * System.out.println(isBalanced(input)); input = "[()()[]]}";
+		 * System.out.println(isBalanced(input));
+		 * 
+		 * List<String> names = Arrays.asList("peter", "anna", "mike", "xenia");
+		 * 
+		 * Collections.sort(names, new Comparator<String>() {
+		 * 
+		 * @Override public int compare(String a, String b) { return b.compareTo(a); }
+		 * });
+		 */
+	}
+
+	public static int[] countBits(int num) {
+		int[] result = new int[num + 1];
+		int p = 1;
+		int pow = 1;
+		for (int i = 1; i <= num; i++) {
+			if (i == pow) {
+				result[i] = 1;
+				pow = pow * 2;
+				p = 1;
+			} else {
+				result[i] = result[p] + 1;
+				p++;
 			}
-		});
-
+		}
+		return result;
 	}
 
 	private static boolean isBalanced(String input) {
+
 		if (input == null || input.length() < 2) {
 			// If length is less than two, it will be either 0 or 1, in which case,
 			// the input string cannot be balanced
