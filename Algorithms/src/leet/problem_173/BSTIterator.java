@@ -10,6 +10,12 @@ public class BSTIterator {
 	Queue<Integer> q;
 	TreeNode root;
 
+	/**
+	 * add all the elements to a queue, in preorder
+	 * Inorder of a BST will be ascending order.
+	 * dequeueing from a queue will return the next smallest element. 
+	 * @param root
+	 */
 	public BSTIterator(TreeNode root) {
 		if (root == null)
 			return;
@@ -18,6 +24,11 @@ public class BSTIterator {
 		traverse(root, q);
 	}
 
+	/**
+	 * Create an inorder traversal
+	 * @param root
+	 * @param queue
+	 */
 	public void traverse(TreeNode root, Queue<Integer> queue) {
 		if (root == null)
 			return;
