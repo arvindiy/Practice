@@ -20,7 +20,7 @@ public class ReshapeTheMatrix {
 			return nums;
 		int[][] result = new int[r][c];
 		for (int i = 0; i < r * c; i++) {
-			result[i / c][i % c] = nums[i / row][i % row];			
+			result[i / c][i % c] = nums[i / r][i % r];			
 		}
 		return result;
 	}
