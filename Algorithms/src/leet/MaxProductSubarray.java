@@ -16,7 +16,8 @@ public class MaxProductSubarray {
 	 *            the command line arguments
 	 */
 	public static void main(String[] args) {
-		int nums[] = { -2, -1, 3, 4, -1, -2, -1, -5, -4 };
+		 int nums[] = { -2, -1, 3, 4, -1, -2, -1, -5, -4 };
+		//int nums[] = { 4, 5, 6 };
 		int prod = maxProdSubarray(nums);
 		System.out.println(prod);
 	}
@@ -25,13 +26,15 @@ public class MaxProductSubarray {
 		if (nums.length == 0) {
 			return 0;
 		}
-		int min_prod, max_prod = 0;
-		int max_so_far = 0;
-		for (int i = 0; i < nums.length; i++) {
-			int num = nums[i];
-
+		int curMax, curMin, returnValue;
+		curMax = curMin = returnValue = nums[0];
+		for (int i = 1; i < nums.length; i++) {
+			int temp = curMax;
+			curMax = Math.max(Math.max(curMax * nums[i], curMin * nums[i]), nums[i]);
+			curMin = Math.min(Math.min(temp * nums[i], curMin * nums[i]), nums[i]);
+			returnValue = Math.max(returnValue, curMax);
 		}
-		return max_so_far;
+		return returnValue;
 	}
 
 }
