@@ -14,11 +14,24 @@ public class BinaryTreeLevelOrderTraversal {
 
 	}
 
+	/**
+	 * This method would do level order traversal of a binary tree.
+	 * Following are the steps
+	 * 	1. Create a queue
+	 *  2. Add the root node 
+	 *  3. Initialize an integer variable to the size of the queue
+	 *  4. Iterate until the integer is > 0
+	 *  5. Remove an element
+	 *  6. Add the left and right children (if not null) to the queue, of the removed element
+	 *  7. Decrement the integer.  
+	 * @param root
+	 * @return
+	 */
 	public List<List<Integer>> levelOrder(TreeNode root) {
 		List<List<Integer>> returnList = new ArrayList<List<Integer>>();
 		if(root == null)
 			return returnList;
-		//Iterative metod
+		//Iterative method
 		Queue<TreeNode> q = new LinkedList<TreeNode>();		
 		q.add(root);
 		while(true) {
