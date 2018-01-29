@@ -1,11 +1,13 @@
 package sort;
 
+import java.util.Arrays;
+
 public class QuickSort {
 
 	public static void main(String[] args) {
 		int nums[] = { 4, 2, 56, -23, 42 };
 		doQuickSort(nums);
-		printArray(nums);
+		System.out.println("Sorted Array..." + Arrays.toString(nums));
 	}
 
 	/**
@@ -33,6 +35,13 @@ public class QuickSort {
 		}
 	}
 
+	/**
+	 * Pick the last 
+	 * @param nums
+	 * @param lo
+	 * @param hi
+	 * @return
+	 */
 	private static int partition(int[] nums, int lo, int hi) {
 		int pivotElement = nums[hi];
 		int i = lo - 1;
@@ -51,13 +60,6 @@ public class QuickSort {
 		int tmp = nums[x];
 		nums[x] = nums[y];
 		nums[y] = tmp;
-	}
-
-	private static void printArray(int[] nums) {
-		for (int i = 0; i < nums.length; i++) {
-			System.out.println(nums[i]);
-		}
-
 	}
 
 }
