@@ -18,11 +18,14 @@ public class IntegerToEnglishWords {
 
 	public String numberToWords(int num) {
 		int thousandsIndex = 0;
+		//StringBuilder result = new StringBuilder();
 		String result = "";
 
 		while (num > 0) {
-			// sb.append(LESSTHAN20[])
-			result = convertThreeDigits(num % 1000) + THOUSANDS[thousandsIndex++] + " " + result;
+			String firstThree = convertThreeDigits(num % 1000);
+			//result.append(result).append(THOUSANDS[thousandsIndex]).append(firstThree);
+			result =  firstThree + THOUSANDS[thousandsIndex] + " " + result;
+			thousandsIndex++;
 			num = num / 1000;
 		}
 
@@ -30,19 +33,17 @@ public class IntegerToEnglishWords {
 	}
 
 	public String convertThreeDigits(int num) {
-		String result = "";
+		StringBuilder result = new StringBuilder();
 		if (num < 10) {
-			result += LESSTHAN20[num] + " ";
-
+			result.append(LESSTHAN20[num]).append(" ");
 		} else if (num < 20) {
-			result += LESSTHAN20[num] + " ";
-
+			result.append(LESSTHAN20[num]).append(" ");
 		} else if (num < 100) {
-			result += TENS[num / 10] + " " + convertThreeDigits(num % 10);
+			result.append(TENS[num / 10]).append(" ").append(convertThreeDigits(num % 10));
 		} else {
-			result += LESSTHAN20[num / 100] + " HUNDRED " + convertThreeDigits(num % 100);
+			result.append(LESSTHAN20[num / 100]).append(" HUNDRED ").append(convertThreeDigits(num % 100));
 		}
-		return result;
+		return result.toString();
 	}
 
 }
