@@ -10,25 +10,22 @@ public class IntegerToEnglishWords {
 
 	public static void main(String[] args) {
 		// int num = 673;
-		//int num = 2234345;
-		int num = 2147483633;
+		int num = 990891111;
+		// int num = 2147483633;
 		System.out.println(new IntegerToEnglishWords().numberToWords(num));
-
 	}
 
 	public String numberToWords(int num) {
 		int thousandsIndex = 0;
-		//StringBuilder result = new StringBuilder();
+		// StringBuilder result = new StringBuilder();
 		String result = "";
-
 		while (num > 0) {
 			String firstThree = convertThreeDigits(num % 1000);
-			//result.append(result).append(THOUSANDS[thousandsIndex]).append(firstThree);
-			result =  firstThree + THOUSANDS[thousandsIndex] + " " + result;
+			// result.append(result).append(THOUSANDS[thousandsIndex]).append(firstThree);
+			result = firstThree + THOUSANDS[thousandsIndex] + " " + result;
 			thousandsIndex++;
 			num = num / 1000;
 		}
-
 		return result;
 	}
 
