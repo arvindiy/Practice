@@ -12,13 +12,10 @@ public class ThreeSum_Closest {
 	}
 
 	/**
-	 * 1. Sort the array
-	 * 2. In a loop, pick one element
-	 * 3. Iterate over the rest of the elements
-	 * 4. Keep two pointers, say left and right. 
-	 * 5. left = i + 1, right = length - 1
-	 * 6. Iterate over another loop until left < right
-	 * 7. Add these three elements, and check if the sum is closest to the target
+	 * 1. Sort the array 2. In a loop, pick one element 3. Iterate over the rest of
+	 * the elements 4. Keep two pointers, say left and right. 5. left = i + 1, right
+	 * = length - 1 6. Iterate over another loop until left < right 7. Add these
+	 * three elements, and check if the sum is closest to the target
 	 * 
 	 * @param nums
 	 * @param target
@@ -35,7 +32,8 @@ public class ThreeSum_Closest {
 			while (j < k) {
 				int sum = nums[i] + nums[j] + nums[k];
 				int diff = Math.abs(sum - target);
-				if(diff == 0) return sum;
+				if (diff == 0)
+					return sum;
 				if (diff < min) {
 					min = diff;
 					result = sum;
