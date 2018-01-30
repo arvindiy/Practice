@@ -72,13 +72,10 @@ public class TrappingRainWater {
 	}
 	
 	private static int trapWater(int[] towers) {
-
 		int answer = 0;
-
 		// We can hold water only if there are more than 2 towers
 		if (towers.length < 3)
 			return answer;
-
 		int left = 0;
 		int right = towers.length - 1;
 		// Keep moving to the right, until we find a tower taller than the one on the
@@ -92,23 +89,26 @@ public class TrappingRainWater {
 		while (left < right && towers[right] <= towers[right - 1]) {
 			right--;
 		}
-
+		
+		//Move within the boundaries
 		while (left < right) {
 			int leftHeight = towers[left];
 			int rightHeight = towers[right];
 			if(leftHeight <= rightHeight) {
+				//Move from left to right
+				//Add all the volumes that are lesser than the left tower
 				while(left < right && leftHeight >= towers[++left]) {
 					answer += (leftHeight - towers[left]);
 				}
 			}
 			else {
+				//Move from right to left
+				//Add all the volumes that are lesser than the right tower
 				while(left < right && rightHeight >= towers[--right]) {
-					answer += rightHeight - towers[right];
+					answer += (rightHeight - towers[right]);
 				}
 			}
-			
 		}
-
 		return answer;
 	}
 
