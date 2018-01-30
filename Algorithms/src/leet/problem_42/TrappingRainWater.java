@@ -1,11 +1,13 @@
-package algo;
+package leet.problem_42;
 
 //https://leetcode.com/problems/trapping-rain-water/description/
+
+//This was my facebook 2018 phone screening interview coding question
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Facebook2018PhoneInterview {
+public class TrappingRainWater {
 
 	public static void main(String args[]) {
 		// (2,1), (3,1), (1,1), (3,2), (2,1), (3,2)
