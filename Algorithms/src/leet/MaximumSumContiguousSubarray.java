@@ -14,13 +14,14 @@ public class MaximumSumContiguousSubarray {
 	 */
 	public static void main(String[] args) {
 		// int nums[] = {-2, -1, -3, -4, -1};
-		int nums[] = { -2, 1, -3, 4, -1, 2, -1, -8, -5, 4 };
+		int nums[] = { -2, -1, -3, -4, -1, -2, -1, -8, -5, 4 };
 		int sum = finMaxSumCont(nums);
 		System.out.println(sum);
 	}
 
 	private static int finMaxSumCont(int[] nums) {
 		int max_so_far = Integer.MIN_VALUE, startingIndex = 0, endingIndex = 0;
+		// Start from the first item
 		int max_ending_here = nums[0];
 		for (int i = 1; i < nums.length; i++) {
 			int tmpStartingIndex = Integer.MIN_VALUE, tmpEndingIndex = Integer.MIN_VALUE;
