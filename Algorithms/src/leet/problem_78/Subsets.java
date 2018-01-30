@@ -6,6 +6,15 @@ import java.util.List;
 
 public class Subsets {
 
+	/**
+	 * 1. Iterate over the input array
+	 * 2. Instantiate a result arraylist, and add an empty list
+	 * 3. Iterate over the size of the result array list.
+	 * 4. For every iteration, keep adding elements to the list
+	 * 
+	 * @param nums
+	 * @return
+	 */
 	public List<List<Integer>> subsets(int[] nums) {
 		List<List<Integer>> res = new ArrayList<>();
 		res.add(new ArrayList<Integer>());
@@ -23,7 +32,7 @@ public class Subsets {
 	public static void main(String[] args) {
 		int[] nums = { 1, 2, 3 };
 		List<List<Integer>> result = new Subsets().subsets(nums);
-		System.out.println("hola");
+		System.out.println(result);
 	}
 
 }
