@@ -1,6 +1,9 @@
 package algo;
 
+//https://leetcode.com/problems/trapping-rain-water/description/
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Facebook2018PhoneInterview {
 
@@ -8,12 +11,14 @@ public class Facebook2018PhoneInterview {
 		// (2,1), (3,1), (1,1), (3,2), (2,1), (3,2)
 		// (height, width)
 		// Find out how many slots can contain water.
-
 		/**
-		 * 
-		 * # ## ## ## ##### ########
+		 *  # ## ##
+		 * ## #####
+		 * ########		 
 		 *
 		 */
+
+
 		ArrayList<ArrayList<Integer>> input = new ArrayList<ArrayList<Integer>>();
 
 		{
@@ -43,42 +48,68 @@ public class Facebook2018PhoneInterview {
 			input.add(tuple);
 		}
 
-		char[][] matrix = constructMatrix(input);
-
-	}
-
-	private static char[][] constructMatrix(ArrayList<ArrayList<Integer>> input) {
-		int rows = 0;
-		int cols = 0;
-		/**
-		 * Maximum value as the first element would be the number of rows in the
-		 * resultant matrix.
-		 */
+		ArrayList<Integer> towers = new ArrayList<Integer>();
+		//Convert the tuples into an array
 		for (int i = 0; i < input.size(); i++) {
 			ArrayList<Integer> tuple = input.get(i);
-			rows = Math.max(rows, tuple.get(0));
-			cols += tuple.get(1);
-		}
-
-		char[][] matrix = new char[rows][cols];
-		int tupleIndex = 0;
-		for (int i = cols - 1; i >= 0; i--) {
-			for (int j = rows - 1; j >= 0; j--) {
-				ArrayList<Integer> tuple = input.get(tupleIndex);
-				int height = tuple.get(0);
-				int width = tuple.get(1);
-
-				if (height > 0) {
-					matrix[i][j] = '#';
-				}
-				tuple.set(0, height--);
-
-				tupleIndex++;
-
+			int height = tuple.get(0);
+			int width = tuple.get(1);
+			for (int j = 0; j < width; j++) {
+				towers.add(height);
 			}
-
 		}
-		return null;
+		System.out.println(towers);
+		int arr[] = new int[towers.size()];
+		int i =0;
+		for (Integer n : towers) {
+			arr[i++] = n;
+		}
+		int answer = trapWater(arr);
+		System.out.println(answer);
+		
 	}
+	
+	private static int trapWater(int[] towers) {
+
+		int answer = 0;
+
+		// We can hold water only if there are more than 2 towers
+		if (towers.length < 3)
+			return answer;
+
+		int left = 0;
+		int right = towers.length - 1;
+		// Keep moving to the right, until we find a tower taller than the one on the
+		// left
+		while (left < right && towers[left] <= towers[left + 1]) {
+			left++;
+		}
+
+		// Keep moving to the left, until we find a tower taller than the one on the
+		// right
+		while (left < right && towers[right] <= towers[right - 1]) {
+			right--;
+		}
+
+		while (left < right) {
+			int leftHeight = towers[left];
+			int rightHeight = towers[right];
+			if(leftHeight <= rightHeight) {
+				while(left < right && leftHeight >= towers[++left]) {
+					answer += (leftHeight - towers[left]);
+				}
+			}
+			else {
+				while(left < right && rightHeight >= towers[--right]) {
+					answer += rightHeight - towers[right];
+				}
+			}
+			
+		}
+
+		return answer;
+	}
+
+	
 
 }
