@@ -19,12 +19,29 @@ public class MaximumSumContiguousSubarray {
 		System.out.println(sum);
 	}
 
+	/**
+	 * this method would handle all negative elements too
+	 * 
+	 * @param nums
+	 * @return
+	 */
 	private static int finMaxSumCont(int[] nums) {
 		int max_so_far = Integer.MIN_VALUE, startingIndex = 0, endingIndex = 0;
 		// Start from the first item
 		int max_ending_here = nums[0];
 		for (int i = 1; i < nums.length; i++) {
+			//Keep tabs of starting and ending indexes temporarily
 			int tmpStartingIndex = Integer.MIN_VALUE, tmpEndingIndex = Integer.MIN_VALUE;
+			
+			/*
+			 * the variable max_ending_here maintains the maximum contiguous sum until this element
+			 * This variable is instantiated to the first element.
+			 * The first time we enter the loop, we find out if adding this max with the latest number
+			 * is going to be greater than max.
+			 * If it is going to be greater, then we would assign the added value to the max variable.
+			 *  
+			 */
+			
 			if (max_ending_here + nums[i] > nums[i]) {
 				max_ending_here = max_ending_here + nums[i];
 				tmpEndingIndex = i;
