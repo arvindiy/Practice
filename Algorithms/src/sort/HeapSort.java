@@ -12,9 +12,10 @@ public class HeapSort {
 	}
 
 	/**
-	 * 1. Starting from the parent of the last element, we heapify the tree. 2. For
-	 * all the elements, starting from the last but one element, swap the element
-	 * with the first one 3. Heapify the tree recursively
+	 * 1. Starting from the parent of the last element, we heapify the tree. 
+	 * 2. For all the elements, starting from the last but one element, swap the element
+	 * 		with the first one 
+	 * 3. Heapify the tree recursively
 	 * 
 	 * @param nums
 	 * @return
@@ -35,31 +36,31 @@ public class HeapSort {
 	/**
 	 * This method would heapify the tree
 	 * @param arr
-	 * @param n
-	 * @param i
+	 * @param numberOfElements
+	 * @param index
 	 */
-	private void heapify(int[] arr, int n, int i) {
-		int largest = i; // Root Node
-		int left = 2 * i + 1; // Left Element
-		int right = 2 * i + 2; // Right Element
+	private void heapify(int[] arr, int numberOfElements, int index) {
+		int largest = index; // Root Node
+		int left = 2 * index + 1; // Left Element
+		int right = 2 * index + 2; // Right Element
 
 		// If the left node is larger than the root element,
 		// make the left node as the largest
-		if (left < n && arr[left] > arr[largest]) {
+		if (left < numberOfElements && arr[left] > arr[largest]) {
 			largest = left;
 		}
 
 		// If the right node is larger than the root element,
 		// make the left node as the largest
-		if (right < n && arr[right] > arr[largest]) {
+		if (right < numberOfElements && arr[right] > arr[largest]) {
 			largest = right;
 		}
 
 		// If the largest element changed, swap the elements,
 		// and heapify the tree again
-		if (largest != i) {
-			swap(arr, i, largest);
-			heapify(arr, n, largest);
+		if (largest != index) {
+			swap(arr, index, largest);
+			heapify(arr, numberOfElements, largest);
 		}
 	}
 

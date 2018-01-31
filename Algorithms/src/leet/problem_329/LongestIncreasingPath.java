@@ -52,6 +52,7 @@ public class LongestIncreasingPath {
 		 * Hence the following values in dx as {-1,-0,1,0} Same logic applies for the
 		 * 'y' dimension too
 		 */
+		//{TOP, LEFT, BOTTOM, RIGHT}
 		int[] dx = { -1, 0, 1, 0 };
 		int[] dy = { 0, 1, 0, -1 };
 
