@@ -66,11 +66,16 @@ public class TrappingRainWater {
 		for (Integer n : towers) {
 			arr[i++] = n;
 		}
-		int answer = trapWater(arr);
-		System.out.println(answer);
+		System.out.println(trapWater(arr));
+		System.out.println(trapWater(new int[]{2,3,1,2,2}));
+		
 		
 	}
 	
+	/**
+	 * This method would return the number of blocks of water
+	 * this 2D structure can hold.
+	 */
 	private static int trapWater(int[] towers) {
 		int answer = 0;
 		// We can hold water only if there are more than 2 towers
