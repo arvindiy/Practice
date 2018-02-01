@@ -1,4 +1,4 @@
-package leet.problem_102;
+package leet.medium.problem_102;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
