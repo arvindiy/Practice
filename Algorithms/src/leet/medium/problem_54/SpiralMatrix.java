@@ -14,43 +14,49 @@ public class SpiralMatrix {
 
 	public static List<Integer> spiralOrder(int[][] matrix) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
-		int rows = matrix.length;
-		int cols = matrix[0].length;
 
 		if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
 			return result;
-
-		int top = 0;
-		int right = cols - 1;
-		int bottom = rows - 1;
-		int left = 0;
+		
+		int rows = matrix.length;
+		int cols = matrix[0].length;
+		int rowBegin = 0;
+		int rowEnd = rows - 1;
+		int colBegin = 0;
+		int colEnd = cols - 1;
 
 		while (result.size() < (rows * cols)) {
-			for (int i = top; i <= right; i++) {
-				result.add(matrix[top][i]);
+			
+			//Traverse from top left to top right
+			for (int i = colBegin; i <= colEnd; i++) {
+				result.add(matrix[rowBegin][i]);
 			}
-			top++;
+			rowBegin++;
 
-			for (int i = right; i <= bottom; i++) {
-				result.add(matrix[i][right]);
+			//Traverse from top right to bottom right
+			for (int i = rowBegin; i <= rowEnd; i++) {
+				result.add(matrix[i][colEnd]);
 			}
-			right--;
+			colEnd--;
 
-			if (bottom > top)
-				break;
+			//Traverse from bottom right to bottom left
+			if (rowBegin <= rowEnd) {
+				for (int i = colEnd; i >= colBegin; i--) {
+					result.add(matrix[rowEnd][i]);
+				}
+			} else
+				System.out.println("A------" + rowBegin + " " + rowEnd);
+			rowEnd--;
 
-			for (int i = bottom; i >= left; i--) {
-				result.add(matrix[bottom][i]);
+			//Traverse from bottom left to top left
+			if (colBegin <= colEnd) {
+				for (int i = rowEnd; i >= rowBegin; i--) {
+					result.add(matrix[i][colBegin]);
+				}
+			} else {
+				System.out.println("B------" + colBegin + " " + colEnd);
 			}
-			bottom--;
-
-			if (left < right)
-				break;
-
-			for (int i = left; i >= top; i--) {
-				result.add(matrix[i][left]);
-			}
-			left++;
+			colBegin++;
 		}
 		return result;
 	}
