@@ -1,4 +1,4 @@
-package leet.problem_104;
+package leet.medium.problem_104;
 
 //https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
 
