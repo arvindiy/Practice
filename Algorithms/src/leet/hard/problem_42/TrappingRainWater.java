@@ -1,4 +1,4 @@
-package leet.problem_42;
+package leet.hard.problem_42;
 
 //https://leetcode.com/problems/trapping-rain-water/description/
 
