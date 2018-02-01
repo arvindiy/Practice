@@ -1,5 +1,5 @@
 package leet.medium.problem_48;
-
+//https://leetcode.com/problems/rotate-image/description/
 import java.util.Arrays;
 
 public class RotateImage {
@@ -21,7 +21,10 @@ public class RotateImage {
 
 	public void rotate(int[][] matrix) {
 		int start = 0;
-		int end = matrix.length-1;
+		int end = matrix.length - 1;
+		/*
+		 * Swap the rows
+		 */
 		while (start <= end) {
 			int[] tmp = matrix[start];
 			matrix[start] = matrix[end];
@@ -29,7 +32,8 @@ public class RotateImage {
 			end--;
 			start++;
 		}
-		
+
+		// Move the elements
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = i; j < matrix[0].length; j++) {
 				int tmp = matrix[i][j];
