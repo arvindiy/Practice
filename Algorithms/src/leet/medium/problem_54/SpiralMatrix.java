@@ -1,4 +1,4 @@
-package leet;
+package leet.medium.problem_54;
 
 import java.util.ArrayList;
 import java.util.List;
