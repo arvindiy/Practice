@@ -6,8 +6,8 @@ public class SubsetSum {
 
 	public static void main(String[] args) {
 		//int[] arr = { 2, 3, 5, 6, 8, 10 };
-		int[] arr = {3, 34, 4, 12, 1, 2};
-		int sum = 47;
+		int[] arr = {3, 34, 4, 12, 8, 2};
+		int sum = 7;
 		System.out.println(subSetSum(arr, sum));
 	}
 
