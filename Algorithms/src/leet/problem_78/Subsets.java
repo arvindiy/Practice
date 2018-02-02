@@ -26,6 +26,7 @@ public class Subsets {
 				res.add(a);
 			}
 		}
+		
 		return res;
 	}
 
