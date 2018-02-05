@@ -1,23 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package leet;
+package leet.medium.problem_152;
 //https://leetcode.com/problems/maximum-product-subarray/description/
-/**
- *
- * @author akrishnaniyer
- */
-public class MaxProductSubarray {
 
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
+public class MaxProductSubarray {
 	public static void main(String[] args) {
-		 int nums[] = { -2, -1, 3, 4, -1, -2, -1, -5, -4 };
-		//int nums[] = { 4, 5, 6 };
+		int nums[] = { -2, -1, 3, 4, -1, -2, -1, -5, -4 };
+		// int nums[] = { 4, 5, 6 };
 		int prod = maxProdSubarray(nums);
 		System.out.println(prod);
 	}
