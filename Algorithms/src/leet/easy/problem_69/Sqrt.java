@@ -14,6 +14,12 @@ public class Sqrt {
 		int start = 1, end = x;
 		while (start < end) {
 			int mid = start + (end - start) / 2;
+			/**
+			 * if mid^2 <=x && (mid+1)^2 < x, we found the sqrt
+			 * if mid^2 > x move the end element to "mid"
+			 * else move start to mid+1
+			 * 
+			 */
 			if (mid <= x / mid && (mid + 1) > x / (mid + 1))// Found the result
 				return mid;
 			else if (mid > x / mid)// Keep checking the left part
