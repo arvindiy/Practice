@@ -6,8 +6,8 @@ public class CoinChange {
 
 	public static void main(String[] args) {
 		CoinChange coinChange = new CoinChange();
-		int[] coins = { 4, 2, 5 ,1};
-		int sum = 11;
+		int[] coins = { 2,5,3,6};
+		int sum = 4;
 		int[] cache = new int[sum + 1];
 		System.out.println(coinChange.coinCount(coins, sum, cache));
 
@@ -41,6 +41,7 @@ public class CoinChange {
 		cache[remainingSum] = count == Integer.MAX_VALUE ? -1 : count;
 
 		return cache[remainingSum];
+		
 	}
 
 }
