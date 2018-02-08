@@ -14,7 +14,7 @@ public class MedianOfSortedArrays {
 
 	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
 		int[] mergedArray = mergeArrays(nums1, nums2);
-		System.out.println(Arrays.toString(mergedArray));
+		//System.out.println(Arrays.toString(mergedArray));
 		return median(mergedArray);
 	}
 
