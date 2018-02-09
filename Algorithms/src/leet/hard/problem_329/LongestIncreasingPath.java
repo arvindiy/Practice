@@ -1,4 +1,4 @@
-package leet.problem_329;
+package leet.hard.problem_329;
 
 //https://leetcode.com/problems/longest-increasing-path-in-a-matrix/description/
 
