@@ -10,6 +10,14 @@ public class BestTimeToBuyAndSellStock {
 		System.out.println(obj.maxProfit(prices));
 	}
 
+	/**
+	 * Keep track of the lowest price the stock was bought at.
+	 * if the difference between the current price and the lowest price is 
+	 * bigger than the tracked maximum, replace the diference with the 
+	 * maximum value.
+	 * @param prices
+	 * @return
+	 */
 	public int maxProfit(int[] prices) {
 		if (prices.length == 0)
 			return 0;
