@@ -4,21 +4,21 @@ package geeks4geeks;
 
 public class EightPuzzle {
 
-	public static void main(String[] args) {
-		int[][] grid = { { 1, 2, 3 }, { 4, 0, 5 }, { 8, 6, 7 } };
-		System.out.println(isSolvable(grid));
+    public static void main(String[] args) {
+        int[][] grid = {{1, 2, 3}, {4, 0, 5}, {8, 6, 7}};
+        System.out.println(isSolvable(grid));
 
-	}
+    }
 
-	private static boolean isSolvable(int nums[][]) {
-		boolean retVal = false;
-		
-		for (int i = 0; i < nums.length; i++) {
-			for (int j = 0; j < nums.length; j++) {
-				System.out.println(nums[i][j]);
-			}
-		}
-		return retVal;
-	}
+    private static boolean isSolvable(int nums[][]) {
+        boolean retVal = false;
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums.length; j++) {
+                System.out.println(nums[i][j]);
+            }
+        }
+        return retVal;
+    }
 
 }
