@@ -2,6 +2,8 @@ package algo;
 
 //february 13 2018
 
+//https://www.careercup.com/question?id=20308668
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -62,12 +64,42 @@ class Replace_Questions_with_1_and_0 {
 
 		List<String> result = new ArrayList<String>();
 
-		result = generate(input, 0, result);
+		//result = output(input, 0, result);
+		result = outputAllString(input);
 
 		for (String s : result) {
 			System.out.print(s + " ");
 		}
 		System.out.println();
+	}
+
+	public static List<String> outputAllString(String pattern) {
+		
+		ArrayList<String> potential_pattern = new ArrayList<String>();
+		potential_pattern.add("");
+		for (int i = 0; i < pattern.length(); i++) {
+			/*
+			 * for each potential pattern, either add the non-? character
+			 * or for each ?, add 2 instances of all the available matches
+			 * 11?? - 
+			 * 1,1
+			 * [1,1,0], [1,1,1]
+			 * [1,1,0,1],[1,1,0,0],[1,1,1,1],[1,1,10]
+			 */
+			for (int j = potential_pattern.size() - 1; j >= 0; j--) {
+				String s = potential_pattern.remove(j);
+				if (pattern.charAt(i) != '?') {
+					s += pattern.charAt(i);
+					potential_pattern.add(j, s);
+				} else {
+					String temp = s + "0";
+					potential_pattern.add(j, temp);
+					temp = s + "1";
+					potential_pattern.add(j, temp);
+				}
+			}
+		}
+		return potential_pattern;
 	}
 
 	/** Provided **/
