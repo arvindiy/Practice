@@ -35,11 +35,16 @@ public class BinaryTreeLevelOrderTraversal {
 		Queue<TreeNode> q = new LinkedList<TreeNode>();		
 		q.add(root);
 		while(true) {
+			//The node count at each level 
 			int nodeCount = q.size();
 			if(nodeCount == 0)
 				break;
 			
 			List<Integer> levelNodes = new ArrayList<Integer>();
+			/*
+			 * Add left and right nodes, at that level to the queue
+			 * until the nodeCount is 0
+			 */
 			while(nodeCount > 0) {
 				TreeNode n = q.poll();
 				levelNodes.add(n.val);
