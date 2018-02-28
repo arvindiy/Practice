@@ -6,7 +6,7 @@ public class CoinChange {
 
 	public static void main(String[] args) {
 		CoinChange coinChange = new CoinChange();
-		int[] coins = { 2,5,3,6};
+		int[] coins = { 1,2,3};
 		int sum = 4;
 		int[] cache = new int[sum + 1];
 		System.out.println(coinChange.coinCount(coins, sum, cache));
