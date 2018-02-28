@@ -1,4 +1,6 @@
-package algo;
+package leet.medium.problem_5;
+
+//https://leetcode.com/problems/longest-palindromic-substring/description/
 
 /*
   The following algorithm finds the longest palindrome substring in a given string
